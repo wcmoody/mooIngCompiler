@@ -9,7 +9,7 @@ Clemson, SC
 
 ### Introduction
 
-This compiler is the final semester project of John Ingram <jei@clemson.edu> and W. Clay Moody <wcm@clemson.edu> for CPSC 827 in the Spring of 2013. This class was taught by Dr. Harold Grossman. The compiler is for an education fictional language develed by Dr. Grossman.
+This compiler is the final semester project of John Ingram <jei@clemson.edu> and W. Clay Moody <wcm@clemson.edu> for CPSC 827 in the Spring of 2013. This class was taught by Dr. Harold Grossman. The compiler is for an education fictional language developed by Dr. Grossman.
 
 The MooIng compiler was written in Java in a package called mooingCompiler. The main class was mooIng. The compiler was packaged as a Java jar file and takes one command line argument of the source file to be compiled. The output of the compiler is composed of two output streams. The first is to standard output and includes the user feedback as determined by the flags of the grammar. By default flag `1 (print source code)` is always enabled. The second output is an assembly code file named `mooing.s` written in the GAS syntax. This file by default has the four-tuple intermediate codes as comments in the source code. 
 
