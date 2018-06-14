@@ -1,0 +1,6 @@
+*.class
+*.o
+*.s
+*.jar
+build/
+

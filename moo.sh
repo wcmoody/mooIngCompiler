@@ -13,7 +13,7 @@ fi
 echo "##### SOURCE CODE #####" > $1.out
 cat $1 >> $1.out
 echo "###### SOURCE CODE WITH FOURTUPLES #####" >> $1.out
-java -jar mooIng.jar $1 >> $1.out
+java -jar build/jar/mooIng.jar $1 >> $1.out
 echo "##### CREATED ASSEMBLY CODE WITH FOURTUPLE COMMENTS #####" >> $1.out
 cat mooIng.s >> $1.out
 gcc -m32 -g -c mooIng.s -o mooIng.o
