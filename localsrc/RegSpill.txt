@@ -1,0 +1,11 @@
+##+1+13+20##
+PROGRAM registerSpillage   
+  DECLARE
+      INTEGER SCALAR index;
+  END
+  EXECUTE	
+    index <- ((1+2) + ((3+4) + ((5+6) + ((7+8) ))));
+##-20##
+    STOUT "Register spillage should produce 37: %d\n",index;
+  END  // end execute
+END

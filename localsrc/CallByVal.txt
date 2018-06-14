@@ -1,0 +1,25 @@
+##+1+13##
+PROGRAM callByVal
+  DECLARE
+	INTEGER SCALAR d;
+  END
+
+  PROCEDURE squareVal{VALUE INTEGER SCALAR vald }  
+    DECLARE
+      INTEGER SCALAR temp ;
+    END
+
+	temp <- d ;
+	d <- temp * temp;
+	STOUT "Inside Value Test procedure - the variable 'd' is %d \n", d ;	
+  END  // squareValue   
+  
+  EXECUTE
+	
+	d <- 5 ;
+	STOUT "In the main body the variable 'd' is %d \n", d;
+	CALL squareVal{VALUE d} ;
+	STOUT "After returning from Value Test: 'd' is %d \n", d;
+  END   
+
+END   

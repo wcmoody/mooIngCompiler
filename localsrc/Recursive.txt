@@ -1,0 +1,29 @@
+##+1+13##
+PROGRAM recursive
+  DECLARE
+	INTEGER SCALAR c;
+  END
+
+  PROCEDURE callMe{VALUE INTEGER SCALAR count}  
+    
+    DECLARE
+    	INTEGER SCALAR notused;
+    END
+    
+    IF (count < 10) THEN
+      count <- count + 1;
+      STOUT "Count is %d \n", count;
+      CALL callMe{VALUE count} ;
+    END; //end if 
+    
+  END  // callMe  
+
+
+  EXECUTE
+       c <- 0;
+       CALL callMe {VALUE c};
+       STOUT "We are done \n"; 
+  END   
+
+END
+

@@ -1,0 +1,243 @@
+##### SOURCE CODE #####
+##+1+13##
+PROGRAM callByVal
+  DECLARE
+	INTEGER SCALAR d;
+  END
+
+  PROCEDURE squareVal{VALUE INTEGER SCALAR vald }  
+    DECLARE
+      INTEGER SCALAR temp ;
+    END
+
+	temp <- d ;
+	d <- temp * temp;
+	STOUT "Inside Value Test procedure - the variable 'd' is %d \n", d ;	
+  END  // squareValue   
+  
+  EXECUTE
+	
+	d <- 5 ;
+	STOUT "In the main body the variable 'd' is %d \n", d;
+	CALL squareVal{VALUE d} ;
+	STOUT "After returning from Value Test: 'd' is %d \n", d;
+  END   
+
+END   
+###### SOURCE CODE WITH FOURTUPLES #####
+Name: John Ingram and W. Clay Moody
+Email: {jei,wcm}@clemson.edu
+Date: 2013/04/04 10:31:47
+
+
+
+##+1+13##
+PROGRAM callByVal
+  DECLARE
+				Four Tuple is	(callByVal, BEGINPROGRAM, --, --)
+	INTEGER SCALAR d;
+				Four Tuple is	(d, MEMORY, 1, 1)
+  END
+
+  PROCEDURE squareVal{VALUE INTEGER SCALAR vald }  
+				Four Tuple is	(--, ENDDECLARATIONS, --, --)
+				Four Tuple is	(squareVal, BEGINPROCEDURE, --, --)
+				Four Tuple is	(--, BEGINFORMALPARAMETERLIST, --, --)
+				Four Tuple is	(vald, FORMALVALPARAMETER, 1, 1)
+    DECLARE
+				Four Tuple is	(--, ENDFORMALPARAMETERLIST, --, --)
+      INTEGER SCALAR temp ;
+				Four Tuple is	(temp, MEMORY, 1, 1)
+    END
+
+	temp <- d ;
+				Four Tuple is	(--, ENDDECLARATIONS, --, --)
+				Four Tuple is	(temp, STORE, d, --)
+	d <- temp * temp;
+				Four Tuple is	(I$0, IMULT, temp, temp)
+				Four Tuple is	(d, STORE, I$0, --)
+	STOUT "Inside Value Test procedure - the variable 'd' is %d \n", d ;	
+				Four Tuple is	(printf, PROCEDURECALL, --, --)
+				Four Tuple is	(--, BEGINACTUALPARAMETERLIST, --, --)
+				Four Tuple is	(--, VALACTUALPARAMETER, "Inside Value Test procedure - the variable 'd' is %d \n", --)
+				Four Tuple is	(--, VALACTUALPARAMETER, d, --)
+				Four Tuple is	(--, ENDACTUALPARAMETERLIST, --, --)
+				Four Tuple is	(printf, ENDPROCEDURECALL, --, --)
+  END  // squareValue   
+  
+  EXECUTE
+				Four Tuple is	(squareVal, ENDPROCEDURE, --, --)
+	
+	d <- 5 ;
+				Four Tuple is	(main, LABEL, --, --)
+				Four Tuple is	(d, STORE, 5, --)
+	STOUT "In the main body the variable 'd' is %d \n", d;
+				Four Tuple is	(printf, PROCEDURECALL, --, --)
+				Four Tuple is	(--, BEGINACTUALPARAMETERLIST, --, --)
+				Four Tuple is	(--, VALACTUALPARAMETER, "In the main body the variable 'd' is %d \n", --)
+				Four Tuple is	(--, VALACTUALPARAMETER, d, --)
+				Four Tuple is	(--, ENDACTUALPARAMETERLIST, --, --)
+				Four Tuple is	(printf, ENDPROCEDURECALL, --, --)
+	CALL squareVal{VALUE d} ;
+				Four Tuple is	(squareVal, PROCEDURECALL, --, --)
+				Four Tuple is	(--, BEGINACTUALPARAMETERLIST, --, --)
+				Four Tuple is	(--, VALACTUALPARAMETER, d, --)
+				Four Tuple is	(--, ENDACTUALPARAMETERLIST, --, --)
+				Four Tuple is	(squareVal, ENDPROCEDURECALL, --, --)
+	STOUT "After returning from Value Test: 'd' is %d \n", d;
+				Four Tuple is	(printf, PROCEDURECALL, --, --)
+				Four Tuple is	(--, BEGINACTUALPARAMETERLIST, --, --)
+				Four Tuple is	(--, VALACTUALPARAMETER, "After returning from Value Test: 'd' is %d \n", --)
+				Four Tuple is	(--, VALACTUALPARAMETER, d, --)
+				Four Tuple is	(--, ENDACTUALPARAMETERLIST, --, --)
+				Four Tuple is	(printf, ENDPROCEDURECALL, --, --)
+  END   
+
+END   
+				Four Tuple is	(--, ENDEXECUTION, --, --)
+				Four Tuple is	(callByVal, ENDPROGRAM, --, --)
+WOOT! Start symbol on STACK!
+##### CREATED ASSEMBLY CODE WITH FOURTUPLE COMMENTS #####
+
+#________(callByVal, BEGINPROGRAM, --, --)_________
+	.section	.data
+.SL2:	.string	"After returning from Value Test: 'd' is %d \n"
+.SL1:	.string	"In the main body the variable 'd' is %d \n"
+.SL0:	.string	"Inside Value Test procedure - the variable 'd' is %d \n"
+virtual:
+		.long	0
+
+#________(d, MEMORY, 1, 1)_________
+d:
+		.long	0
+
+#________(--, ENDDECLARATIONS, --, --)_________
+
+#________(squareVal, BEGINPROCEDURE, --, --)_________
+	.text
+	.globl squareVal
+	.type squareVal, @function
+squareVal:
+	.section	.data
+
+#________(--, BEGINFORMALPARAMETERLIST, --, --)_________
+
+#________(vald, FORMALVALPARAMETER, 1, 1)_________
+
+#________(--, ENDFORMALPARAMETERLIST, --, --)_________
+#allocate memory for value parameter: vald
+vald:
+		.long	0
+
+#________(temp, MEMORY, 1, 1)_________
+temp:
+		.long	0
+
+#________(--, ENDDECLARATIONS, --, --)_________
+	.text
+	pushl	%ebp
+	movl	%esp, %ebp
+#retrieve value for parameter: vald
+	movl	8(%ebp), %ebx
+	movl	%ebx, vald
+
+#________(temp, STORE, d, --)_________
+	movl	d, %ecx
+	movl	%ecx, temp
+
+#________(I$0, IMULT, temp, temp)_________
+	movl	temp, %esi
+	pushl	%eax
+	pushl	%edx
+	movl	%esi, %eax
+	mull	%esi
+	movl	%eax, %edi
+	popl	%edx
+	popl	%eax
+
+#________(d, STORE, I$0, --)_________
+	movl	%edi, d
+
+#________(printf, PROCEDURECALL, --, --)_________
+
+#________(--, BEGINACTUALPARAMETERLIST, --, --)_________
+
+#________(--, VALACTUALPARAMETER, "Inside Value Test procedure - the variable 'd' is %d \n", --)_________
+
+#________(--, VALACTUALPARAMETER, d, --)_________
+
+#________(--, ENDACTUALPARAMETERLIST, --, --)_________
+	pushl	d
+	pushl	$.SL0
+
+#________(printf, ENDPROCEDURECALL, --, --)_________
+	call	printf
+
+#________(squareVal, ENDPROCEDURE, --, --)_________
+	leave	
+	ret	
+	.size	squareVal, .-squareVal
+
+#________(main, LABEL, --, --)_________
+	.globl main
+	.type main, @function
+main:
+	pushl	%ebp
+	movl	%esp, %ebp
+
+#________(d, STORE, 5, --)_________
+	movl	$5, %ebx
+	movl	%ebx, d
+
+#________(printf, PROCEDURECALL, --, --)_________
+
+#________(--, BEGINACTUALPARAMETERLIST, --, --)_________
+
+#________(--, VALACTUALPARAMETER, "In the main body the variable 'd' is %d \n", --)_________
+
+#________(--, VALACTUALPARAMETER, d, --)_________
+
+#________(--, ENDACTUALPARAMETERLIST, --, --)_________
+	pushl	d
+	pushl	$.SL1
+
+#________(printf, ENDPROCEDURECALL, --, --)_________
+	call	printf
+
+#________(squareVal, PROCEDURECALL, --, --)_________
+
+#________(--, BEGINACTUALPARAMETERLIST, --, --)_________
+
+#________(--, VALACTUALPARAMETER, d, --)_________
+
+#________(--, ENDACTUALPARAMETERLIST, --, --)_________
+	pushl	d
+
+#________(squareVal, ENDPROCEDURECALL, --, --)_________
+	call	squareVal
+
+#________(printf, PROCEDURECALL, --, --)_________
+
+#________(--, BEGINACTUALPARAMETERLIST, --, --)_________
+
+#________(--, VALACTUALPARAMETER, "After returning from Value Test: 'd' is %d \n", --)_________
+
+#________(--, VALACTUALPARAMETER, d, --)_________
+
+#________(--, ENDACTUALPARAMETERLIST, --, --)_________
+	pushl	d
+	pushl	$.SL2
+
+#________(printf, ENDPROCEDURECALL, --, --)_________
+	call	printf
+
+#________(--, ENDEXECUTION, --, --)_________
+	leave
+
+#________(callByVal, ENDPROGRAM, --, --)_________
+	ret	
+	.size	main, .-main
+##### OUTPUT OF DEMONSTRATION PROGRAM #####
+In the main body the variable 'd' is 5 
+Inside Value Test procedure - the variable 'd' is 25 
+After returning from Value Test: 'd' is 25 

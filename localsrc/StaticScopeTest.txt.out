@@ -1,0 +1,219 @@
+##### SOURCE CODE #####
+##+1+13##
+PROGRAM staticScope
+  DECLARE
+	INTEGER SCALAR c;
+  END
+
+  PROCEDURE staticTest{}  
+    
+    DECLARE
+    	INTEGER SCALAR d;
+    END
+    
+		d <- 100;
+		STOUT "Inner Procedure: Local is %d and Global is %d\n",d,c;
+		  
+  END  // staticTest  
+
+
+  EXECUTE
+       c <- 50;
+       STOUT "Pre Procedure: Global is %d\n",c;
+	   CALL staticTest{};
+       STOUT "Post Procedure: Global is %d\n",c;
+  END   
+
+END
+
+###### SOURCE CODE WITH FOURTUPLES #####
+Name: John Ingram and W. Clay Moody
+Email: {jei,wcm}@clemson.edu
+Date: 2013/04/04 10:31:52
+
+
+
+##+1+13##
+PROGRAM staticScope
+  DECLARE
+				Four Tuple is	(staticScope, BEGINPROGRAM, --, --)
+	INTEGER SCALAR c;
+				Four Tuple is	(c, MEMORY, 1, 1)
+  END
+
+  PROCEDURE staticTest{}  
+				Four Tuple is	(--, ENDDECLARATIONS, --, --)
+				Four Tuple is	(staticTest, BEGINPROCEDURE, --, --)
+    
+    DECLARE
+				Four Tuple is	(--, NOFORMALPARAMETERLIST, --, --)
+    	INTEGER SCALAR d;
+				Four Tuple is	(d, MEMORY, 1, 1)
+    END
+    
+		d <- 100;
+				Four Tuple is	(--, ENDDECLARATIONS, --, --)
+				Four Tuple is	(d, STORE, 100, --)
+		STOUT "Inner Procedure: Local is %d and Global is %d\n",d,c;
+				Four Tuple is	(printf, PROCEDURECALL, --, --)
+				Four Tuple is	(--, BEGINACTUALPARAMETERLIST, --, --)
+				Four Tuple is	(--, VALACTUALPARAMETER, "Inner Procedure: Local is %d and Global is %d\n", --)
+				Four Tuple is	(--, VALACTUALPARAMETER, d, --)
+				Four Tuple is	(--, VALACTUALPARAMETER, c, --)
+				Four Tuple is	(--, ENDACTUALPARAMETERLIST, --, --)
+				Four Tuple is	(printf, ENDPROCEDURECALL, --, --)
+		  
+  END  // staticTest  
+
+
+  EXECUTE
+				Four Tuple is	(staticTest, ENDPROCEDURE, --, --)
+       c <- 50;
+				Four Tuple is	(main, LABEL, --, --)
+				Four Tuple is	(c, STORE, 50, --)
+       STOUT "Pre Procedure: Global is %d\n",c;
+				Four Tuple is	(printf, PROCEDURECALL, --, --)
+				Four Tuple is	(--, BEGINACTUALPARAMETERLIST, --, --)
+				Four Tuple is	(--, VALACTUALPARAMETER, "Pre Procedure: Global is %d\n", --)
+				Four Tuple is	(--, VALACTUALPARAMETER, c, --)
+				Four Tuple is	(--, ENDACTUALPARAMETERLIST, --, --)
+				Four Tuple is	(printf, ENDPROCEDURECALL, --, --)
+	   CALL staticTest{};
+				Four Tuple is	(staticTest, PROCEDURECALL, --, --)
+				Four Tuple is	(--, NOFORMALPARAMETERLIST, --, --)
+				Four Tuple is	(--, NOACTUALPARAMETERS, --, --)
+				Four Tuple is	(staticTest, ENDPROCEDURECALL, --, --)
+       STOUT "Post Procedure: Global is %d\n",c;
+				Four Tuple is	(printf, PROCEDURECALL, --, --)
+				Four Tuple is	(--, BEGINACTUALPARAMETERLIST, --, --)
+				Four Tuple is	(--, VALACTUALPARAMETER, "Post Procedure: Global is %d\n", --)
+				Four Tuple is	(--, VALACTUALPARAMETER, c, --)
+				Four Tuple is	(--, ENDACTUALPARAMETERLIST, --, --)
+				Four Tuple is	(printf, ENDPROCEDURECALL, --, --)
+  END   
+
+END
+				Four Tuple is	(--, ENDEXECUTION, --, --)
+				Four Tuple is	(staticScope, ENDPROGRAM, --, --)
+WOOT! Start symbol on STACK!
+##### CREATED ASSEMBLY CODE WITH FOURTUPLE COMMENTS #####
+
+#________(staticScope, BEGINPROGRAM, --, --)_________
+	.section	.data
+.SL0:	.string	"Inner Procedure: Local is %d and Global is %d\n"
+.SL2:	.string	"Post Procedure: Global is %d\n"
+.SL1:	.string	"Pre Procedure: Global is %d\n"
+virtual:
+		.long	0
+
+#________(c, MEMORY, 1, 1)_________
+c:
+		.long	0
+
+#________(--, ENDDECLARATIONS, --, --)_________
+
+#________(staticTest, BEGINPROCEDURE, --, --)_________
+	.text
+	.globl staticTest
+	.type staticTest, @function
+staticTest:
+	.section	.data
+
+#________(--, NOFORMALPARAMETERLIST, --, --)_________
+
+#________(d, MEMORY, 1, 1)_________
+d:
+		.long	0
+
+#________(--, ENDDECLARATIONS, --, --)_________
+	.text
+	pushl	%ebp
+	movl	%esp, %ebp
+
+#________(d, STORE, 100, --)_________
+	movl	$100, %ebx
+	movl	%ebx, d
+
+#________(printf, PROCEDURECALL, --, --)_________
+
+#________(--, BEGINACTUALPARAMETERLIST, --, --)_________
+
+#________(--, VALACTUALPARAMETER, "Inner Procedure: Local is %d and Global is %d\n", --)_________
+
+#________(--, VALACTUALPARAMETER, d, --)_________
+
+#________(--, VALACTUALPARAMETER, c, --)_________
+
+#________(--, ENDACTUALPARAMETERLIST, --, --)_________
+	pushl	c
+	pushl	d
+	pushl	$.SL0
+
+#________(printf, ENDPROCEDURECALL, --, --)_________
+	call	printf
+
+#________(staticTest, ENDPROCEDURE, --, --)_________
+	leave	
+	ret	
+	.size	staticTest, .-staticTest
+
+#________(main, LABEL, --, --)_________
+	.globl main
+	.type main, @function
+main:
+	pushl	%ebp
+	movl	%esp, %ebp
+
+#________(c, STORE, 50, --)_________
+	movl	$50, %ebx
+	movl	%ebx, c
+
+#________(printf, PROCEDURECALL, --, --)_________
+
+#________(--, BEGINACTUALPARAMETERLIST, --, --)_________
+
+#________(--, VALACTUALPARAMETER, "Pre Procedure: Global is %d\n", --)_________
+
+#________(--, VALACTUALPARAMETER, c, --)_________
+
+#________(--, ENDACTUALPARAMETERLIST, --, --)_________
+	pushl	c
+	pushl	$.SL1
+
+#________(printf, ENDPROCEDURECALL, --, --)_________
+	call	printf
+
+#________(staticTest, PROCEDURECALL, --, --)_________
+
+#________(--, NOFORMALPARAMETERLIST, --, --)_________
+
+#________(--, NOACTUALPARAMETERS, --, --)_________
+
+#________(staticTest, ENDPROCEDURECALL, --, --)_________
+	call	staticTest
+
+#________(printf, PROCEDURECALL, --, --)_________
+
+#________(--, BEGINACTUALPARAMETERLIST, --, --)_________
+
+#________(--, VALACTUALPARAMETER, "Post Procedure: Global is %d\n", --)_________
+
+#________(--, VALACTUALPARAMETER, c, --)_________
+
+#________(--, ENDACTUALPARAMETERLIST, --, --)_________
+	pushl	c
+	pushl	$.SL2
+
+#________(printf, ENDPROCEDURECALL, --, --)_________
+	call	printf
+
+#________(--, ENDEXECUTION, --, --)_________
+	leave
+
+#________(staticScope, ENDPROGRAM, --, --)_________
+	ret	
+	.size	main, .-main
+##### OUTPUT OF DEMONSTRATION PROGRAM #####
+Pre Procedure: Global is 50
+Inner Procedure: Local is 100 and Global is 50
+Post Procedure: Global is 50

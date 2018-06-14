@@ -1,0 +1,42 @@
+##+1+13##
+PROGRAM bubbleSort   
+  DECLARE
+      INTEGER VECTOR 5 numbers ;   
+      INTEGER SCALAR swapped , index, length, temp, while ;
+  END
+
+
+     EXECUTE
+	
+	// we will load the values into the vector "numbers"
+	numbers[0] <- 12 ;
+	numbers[1] <- 1000 ;
+	numbers[2] <- 40 ;
+	numbers[3] <- -211 ;
+	numbers[4] <- 8 ;
+	
+	length <- 5 ;
+
+    STOUT "Original Numbers %d, %d, %d, %d, %d \n", numbers[0], numbers[1], numbers[2], numbers[3], numbers[4];
+
+	
+        swapped <- 1 ;
+	index <-1;
+
+
+    FOR while <-1 BY 0 UNTIL /*not*/ swapped>0 DO
+	swapped <- 0;	
+        FOR index <- 1 BY 1 UNTIL /*not*/ index < length DO 
+        IF numbers[index-1] > numbers[index]  THEN
+          temp <- numbers[index-1] ;
+          numbers[index-1] <- numbers[index] ;
+          numbers[index] <- temp ;
+          swapped <- 1 ; // swapped is one if numbers swapped, 0 otherwise
+        END; // end if       
+	END; //end for (index)	
+    END; // end for (while)
+	
+    STOUT "Final Numbers %d, %d, %d, %d, %d \n", numbers[0], numbers[1], numbers[2], numbers[3], numbers[4];
+    
+  END  // end execute
+END

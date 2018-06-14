@@ -1,0 +1,27 @@
+##+1+13##
+PROGRAM staticScope
+  DECLARE
+	INTEGER SCALAR c;
+  END
+
+  PROCEDURE staticTest{}  
+    
+    DECLARE
+    	INTEGER SCALAR d;
+    END
+    
+		d <- 100;
+		STOUT "Inner Procedure: Local is %d and Global is %d\n",d,c;
+		  
+  END  // staticTest  
+
+
+  EXECUTE
+       c <- 50;
+       STOUT "Pre Procedure: Global is %d\n",c;
+	   CALL staticTest{};
+       STOUT "Post Procedure: Global is %d\n",c;
+  END   
+
+END
+
