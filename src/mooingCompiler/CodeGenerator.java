@@ -12,7 +12,7 @@ public class CodeGenerator {
 	ArrayList<FourTuple> fourTuples;
 	
 	public CodeGenerator () throws IOException {
-		fstream_out = new FileWriter("/scratch/mooIng.asm");
+		fstream_out = new FileWriter("scratch/mooIng.asm");
 		out = new BufferedWriter(fstream_out);
 		fourTuples = new ArrayList<FourTuple>();
 		

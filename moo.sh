@@ -9,6 +9,7 @@ then
   exit $E_BADARGS
 fi
 
+mkdir -p scratch
 
 echo "##### SOURCE CODE #####" > $1.out
 cat $1 >> $1.out
